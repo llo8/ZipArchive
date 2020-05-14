@@ -85,7 +85,10 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
     return passwordProtected;
 }
 
-+ (BOOL)isPasswordValidForArchiveAtPath:(NSString *)path password:(NSString *)pw error:(NSError **)error {
++ (BOOL)isPasswordValidForArchiveAtPath:(NSString *)path
+                               password:(NSString *)pw
+                                  error:(NSError **)error
+{
     if (error) {
         *error = nil;
     }
@@ -160,7 +163,9 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
     return passwordValid;
 }
 
-+ (NSNumber *)payloadSizeForArchiveAtPath:(NSString *)path error:(NSError **)error {
++ (NSNumber *)payloadSizeForArchiveAtPath:(NSString *)path
+                                    error:(NSError **)error
+{
     if (error) {
         *error = nil;
     }
@@ -213,19 +218,60 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
 
 #pragma mark - Unzipping
 
-+ (BOOL)unzipFileAtPath:(NSString *)path toDestination:(NSString *)destination
++ (BOOL)unzipFileAtPath:(NSString *)path
+          toDestination:(NSString *)destination
 {
-    return [self unzipFileAtPath:path toDestination:destination delegate:nil];
+    return [self unzipFileAtPath:path
+                   toDestination:destination
+                        delegate:nil];
 }
 
-+ (BOOL)unzipFileAtPath:(NSString *)path toDestination:(NSString *)destination overwrite:(BOOL)overwrite password:(nullable NSString *)password error:(NSError **)error
++ (BOOL)unzipFileAtPath:(NSString *)path
+          toDestination:(NSString *)destination
+              overwrite:(BOOL)overwrite
+               password:(nullable NSString *)password
+                  error:(NSError **)error
 {
-    return [self unzipFileAtPath:path toDestination:destination preserveAttributes:YES overwrite:overwrite password:password error:error delegate:nil progressHandler:nil completionHandler:nil];
+    return [self unzipFileAtPath:path
+                   toDestination:destination
+              preserveAttributes:YES
+                       overwrite:overwrite
+                        password:password
+                           error:error
+                        delegate:nil
+                 progressHandler:nil
+               completionHandler:nil];
 }
 
-+ (BOOL)unzipFileAtPath:(NSString *)path toDestination:(NSString *)destination delegate:(nullable id<SSZipArchiveDelegate>)delegate
++ (BOOL)unzipFileAtPath:(NSString *)path
+          toDestination:(NSString *)destination
+               delegate:(nullable id<SSZipArchiveDelegate>)delegate
 {
-    return [self unzipFileAtPath:path toDestination:destination preserveAttributes:YES overwrite:YES password:nil error:nil delegate:delegate progressHandler:nil completionHandler:nil];
+    return [self unzipFileAtPath:path
+                   toDestination:destination
+              preserveAttributes:YES
+                       overwrite:YES
+                        password:nil
+                           error:nil
+                        delegate:delegate
+                 progressHandler:nil
+               completionHandler:nil];
+}
+
++ (BOOL)unzipFileAtPath:(NSString *)path
+          toDestination:(NSString *)destination
+                  error:(NSError *__autoreleasing  _Nullable *)error
+               delegate:(id<SSZipArchiveDelegate>)delegate
+{
+    return [self unzipFileAtPath:path
+                   toDestination:destination
+              preserveAttributes:YES
+                       overwrite:YES
+                        password:nil
+                           error:error
+                        delegate:delegate
+                 progressHandler:nil
+               completionHandler:nil];
 }
 
 + (BOOL)unzipFileAtPath:(NSString *)path
@@ -235,7 +281,15 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
                   error:(NSError **)error
                delegate:(nullable id<SSZipArchiveDelegate>)delegate
 {
-    return [self unzipFileAtPath:path toDestination:destination preserveAttributes:YES overwrite:overwrite password:password error:error delegate:delegate progressHandler:nil completionHandler:nil];
+    return [self unzipFileAtPath:path
+                   toDestination:destination
+              preserveAttributes:YES
+                       overwrite:overwrite
+                        password:password
+                           error:error
+                        delegate:delegate
+                 progressHandler:nil
+               completionHandler:nil];
 }
 
 + (BOOL)unzipFileAtPath:(NSString *)path
@@ -245,7 +299,15 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
         progressHandler:(void (^)(NSString *entry, unz_file_info zipInfo, long entryNumber, long total))progressHandler
       completionHandler:(void (^)(NSString *path, BOOL succeeded, NSError * _Nullable error))completionHandler
 {
-    return [self unzipFileAtPath:path toDestination:destination preserveAttributes:YES overwrite:overwrite password:password error:nil delegate:nil progressHandler:progressHandler completionHandler:completionHandler];
+    return [self unzipFileAtPath:path
+                   toDestination:destination
+              preserveAttributes:YES
+                       overwrite:overwrite
+                        password:password
+                           error:nil
+                        delegate:nil
+                 progressHandler:progressHandler
+               completionHandler:completionHandler];
 }
 
 + (BOOL)unzipFileAtPath:(NSString *)path
@@ -253,7 +315,15 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
         progressHandler:(void (^_Nullable)(NSString *entry, unz_file_info zipInfo, long entryNumber, long total))progressHandler
       completionHandler:(void (^_Nullable)(NSString *path, BOOL succeeded, NSError * _Nullable error))completionHandler
 {
-    return [self unzipFileAtPath:path toDestination:destination preserveAttributes:YES overwrite:YES password:nil error:nil delegate:nil progressHandler:progressHandler completionHandler:completionHandler];
+    return [self unzipFileAtPath:path
+                   toDestination:destination
+              preserveAttributes:YES
+                       overwrite:YES
+                        password:nil
+                           error:nil
+                        delegate:nil
+                 progressHandler:progressHandler
+               completionHandler:completionHandler];
 }
 
 + (BOOL)unzipFileAtPath:(NSString *)path
@@ -264,7 +334,15 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
                   error:(NSError * *)error
                delegate:(nullable id<SSZipArchiveDelegate>)delegate
 {
-    return [self unzipFileAtPath:path toDestination:destination preserveAttributes:preserveAttributes overwrite:overwrite password:password error:error delegate:delegate progressHandler:nil completionHandler:nil];
+    return [self unzipFileAtPath:path
+                   toDestination:destination
+              preserveAttributes:preserveAttributes
+                       overwrite:overwrite
+                        password:password
+                           error:error
+                        delegate:delegate
+                 progressHandler:nil
+               completionHandler:nil];
 }
 
 + (BOOL)unzipFileAtPath:(NSString *)path
@@ -277,7 +355,16 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
         progressHandler:(void (^_Nullable)(NSString *entry, unz_file_info zipInfo, long entryNumber, long total))progressHandler
       completionHandler:(void (^_Nullable)(NSString *path, BOOL succeeded, NSError * _Nullable error))completionHandler
 {
-    return [self unzipFileAtPath:path toDestination:destination preserveAttributes:preserveAttributes overwrite:overwrite nestedZipLevel:0 password:password error:error delegate:delegate progressHandler:progressHandler completionHandler:completionHandler];
+    return [self unzipFileAtPath:path
+                   toDestination:destination
+              preserveAttributes:preserveAttributes
+                       overwrite:overwrite
+                  nestedZipLevel:0
+                        password:password
+                           error:error
+                        delegate:delegate
+                 progressHandler:progressHandler
+               completionHandler:completionHandler];
 }
 
 + (BOOL)unzipFileAtPath:(NSString *)path
@@ -295,7 +382,9 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
     if (path.length == 0 || destination.length == 0)
     {
         NSDictionary *userInfo = @{NSLocalizedDescriptionKey: @"received invalid argument(s)"};
-        NSError *err = [NSError errorWithDomain:SSZipArchiveErrorDomain code:SSZipArchiveErrorCodeInvalidArguments userInfo:userInfo];
+        NSError *err = [NSError errorWithDomain:SSZipArchiveErrorDomain
+                                           code:SSZipArchiveErrorCodeInvalidArguments
+                                       userInfo:userInfo];
         if (error)
         {
             *error = err;
@@ -405,8 +494,8 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
                                                      totalFiles:(NSInteger)globalInfo.number_entry
                                                     archivePath:path
                                                        fileInfo:fileInfo]) {
-                    success = NO;
-                    canceled = YES;
+//                    success = NO;
+//                    canceled = YES;
                     break;
                 }
             }
@@ -748,19 +837,25 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
 }
 
 #pragma mark - Zipping
-+ (BOOL)createZipFileAtPath:(NSString *)path withFilesAtPaths:(NSArray<NSString *> *)paths
++ (BOOL)createZipFileAtPath:(NSString *)path
+           withFilesAtPaths:(NSArray<NSString *> *)paths
 {
     return [SSZipArchive createZipFileAtPath:path withFilesAtPaths:paths withPassword:nil];
 }
-+ (BOOL)createZipFileAtPath:(NSString *)path withContentsOfDirectory:(NSString *)directoryPath {
++ (BOOL)createZipFileAtPath:(NSString *)path
+    withContentsOfDirectory:(NSString *)directoryPath {
     return [SSZipArchive createZipFileAtPath:path withContentsOfDirectory:directoryPath withPassword:nil];
 }
 
-+ (BOOL)createZipFileAtPath:(NSString *)path withContentsOfDirectory:(NSString *)directoryPath keepParentDirectory:(BOOL)keepParentDirectory {
++ (BOOL)createZipFileAtPath:(NSString *)path
+    withContentsOfDirectory:(NSString *)directoryPath
+        keepParentDirectory:(BOOL)keepParentDirectory {
     return [SSZipArchive createZipFileAtPath:path withContentsOfDirectory:directoryPath keepParentDirectory:keepParentDirectory withPassword:nil];
 }
 
-+ (BOOL)createZipFileAtPath:(NSString *)path withFilesAtPaths:(NSArray<NSString *> *)paths withPassword:(NSString *)password
++ (BOOL)createZipFileAtPath:(NSString *)path
+           withFilesAtPaths:(NSArray<NSString *> *)paths
+               withPassword:(NSString *)password
 {
     SSZipArchive *zipArchive = [[SSZipArchive alloc] initWithPath:path];
     BOOL success = [zipArchive open];
@@ -773,12 +868,20 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
     return success;
 }
 
-+ (BOOL)createZipFileAtPath:(NSString *)path withContentsOfDirectory:(NSString *)directoryPath withPassword:(nullable NSString *)password {
-    return [SSZipArchive createZipFileAtPath:path withContentsOfDirectory:directoryPath keepParentDirectory:NO withPassword:password];
++ (BOOL)createZipFileAtPath:(NSString *)path
+    withContentsOfDirectory:(NSString *)directoryPath
+               withPassword:(nullable NSString *)password {
+    return [SSZipArchive createZipFileAtPath:path
+                     withContentsOfDirectory:directoryPath
+                         keepParentDirectory:NO
+                                withPassword:password];
 }
 
 
-+ (BOOL)createZipFileAtPath:(NSString *)path withContentsOfDirectory:(NSString *)directoryPath keepParentDirectory:(BOOL)keepParentDirectory withPassword:(nullable NSString *)password {
++ (BOOL)createZipFileAtPath:(NSString *)path
+    withContentsOfDirectory:(NSString *)directoryPath
+        keepParentDirectory:(BOOL)keepParentDirectory
+               withPassword:(nullable NSString *)password {
     return [SSZipArchive createZipFileAtPath:path
                      withContentsOfDirectory:directoryPath
                          keepParentDirectory:keepParentDirectory
@@ -792,7 +895,13 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
         keepParentDirectory:(BOOL)keepParentDirectory
                withPassword:(nullable NSString *)password
          andProgressHandler:(void(^ _Nullable)(NSUInteger entryNumber, NSUInteger total))progressHandler {
-    return [self createZipFileAtPath:path withContentsOfDirectory:directoryPath keepParentDirectory:keepParentDirectory compressionLevel:Z_DEFAULT_COMPRESSION password:password AES:YES progressHandler:progressHandler];
+    return [self createZipFileAtPath:path
+             withContentsOfDirectory:directoryPath
+                 keepParentDirectory:keepParentDirectory
+                    compressionLevel:Z_DEFAULT_COMPRESSION
+                            password:password
+                                 AES:YES
+                     progressHandler:progressHandler];
 }
 
 + (BOOL)createZipFileAtPath:(NSString *)path
@@ -864,7 +973,9 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
     return (NULL != _zip);
 }
 
-- (BOOL)writeFolderAtPath:(NSString *)path withFolderName:(NSString *)folderName withPassword:(nullable NSString *)password
+- (BOOL)writeFolderAtPath:(NSString *)path
+           withFolderName:(NSString *)folderName
+             withPassword:(nullable NSString *)password
 {
     NSAssert((_zip != NULL), @"Attempting to write to an archive which was never opened");
     
@@ -879,20 +990,33 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
     return error == ZIP_OK;
 }
 
-- (BOOL)writeFile:(NSString *)path withPassword:(nullable NSString *)password
+- (BOOL)writeFile:(NSString *)path
+     withPassword:(nullable NSString *)password
 {
-    return [self writeFileAtPath:path withFileName:nil withPassword:password];
+    return [self writeFileAtPath:path
+                    withFileName:nil
+                    withPassword:password];
 }
 
-- (BOOL)writeFileAtPath:(NSString *)path withFileName:(nullable NSString *)fileName withPassword:(nullable NSString *)password
+- (BOOL)writeFileAtPath:(NSString *)path
+           withFileName:(nullable NSString *)fileName
+           withPassword:(nullable NSString *)password
 {
-    return [self writeFileAtPath:path withFileName:fileName compressionLevel:Z_DEFAULT_COMPRESSION password:password AES:YES];
+    return [self writeFileAtPath:path
+                    withFileName:fileName
+                compressionLevel:Z_DEFAULT_COMPRESSION
+                        password:password
+                             AES:YES];
 }
 
 // supports writing files with logical folder/directory structure
 // *path* is the absolute path of the file that will be compressed
 // *fileName* is the relative name of the file how it is stored within the zip e.g. /folder/subfolder/text1.txt
-- (BOOL)writeFileAtPath:(NSString *)path withFileName:(nullable NSString *)fileName compressionLevel:(int)compressionLevel password:(nullable NSString *)password AES:(BOOL)aes
+- (BOOL)writeFileAtPath:(NSString *)path
+           withFileName:(nullable NSString *)fileName
+       compressionLevel:(int)compressionLevel
+               password:(nullable NSString *)password
+                    AES:(BOOL)aes
 {
     NSAssert((_zip != NULL), @"Attempting to write to an archive which was never opened");
     
@@ -930,12 +1054,22 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
     return error == ZIP_OK;
 }
 
-- (BOOL)writeData:(NSData *)data filename:(nullable NSString *)filename withPassword:(nullable NSString *)password
+- (BOOL)writeData:(NSData *)data
+         filename:(nullable NSString *)filename
+     withPassword:(nullable NSString *)password
 {
-    return [self writeData:data filename:filename compressionLevel:Z_DEFAULT_COMPRESSION password:password AES:YES];
+    return [self writeData:data
+                  filename:filename
+          compressionLevel:Z_DEFAULT_COMPRESSION
+                  password:password
+                       AES:YES];
 }
 
-- (BOOL)writeData:(NSData *)data filename:(nullable NSString *)filename compressionLevel:(int)compressionLevel password:(nullable NSString *)password AES:(BOOL)aes
+- (BOOL)writeData:(NSData *)data
+         filename:(nullable NSString *)filename
+ compressionLevel:(int)compressionLevel
+         password:(nullable NSString *)password
+              AES:(BOOL)aes
 {
     if (!_zip) {
         return NO;
